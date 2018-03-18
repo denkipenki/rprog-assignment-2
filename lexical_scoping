@@ -1,0 +1,44 @@
+
++# Programming Assignment 2: Lexical Scoping
++
++	a <- makeCacheMatrix( matrix(c(1,2,12,13), nrow = 2, ncol = 2) );
++
++	summary(a);
+
++makeCacheMatrix <- function(x = numeric()) {
++        
++       
++        cache <- NULL
++        setMatrix <- function(newValue) {
++                x <<- newValue
++                
++        }
++
++        getMatrix <- function() {
++                x
++        }
++
++        cacheInverse <- function(solve) {
++                cache <<- solve
++        }
++
++        getInverse <- function() {
++                cache
++        }
++        
++        list(setMatrix = setMatrix, getMatrix = getMatrix, cacheInverse = cacheInverse, getInverse = getInverse)
++        }
++
++
++cacheSolve <- function(y, ...) {
++        inverse <- y$getInverse()
++        if(!is.null(inverse)) {
++                message("getting cached data")
++                return(inverse)
++        }
++       
++        data <- y$getMatrix()
++        inverse <- solve(data)
++        y$cacheInverse(inverse)
++        }
+
